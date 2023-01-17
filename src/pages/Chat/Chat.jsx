@@ -27,7 +27,7 @@ const Chat = () => {
     const [receiveMessage,setReceiveMessage] = useState(null)
     const [changeChat,setChangeChat] = useState(false) 
     const socket = useRef()
-    const socketurl = process.env.SOCKET_URL
+    const socketurl = process.env.REACT_APP_SOCKET_URL
     console.log(newUser,'chat.jsx newuser')
 
     //send message to socket server

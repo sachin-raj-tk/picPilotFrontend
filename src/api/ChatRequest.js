@@ -2,7 +2,7 @@ import axios from "axios";
 
 // const API = axios.create({baseURL: "http://localhost:5000"})
 
-const URL = process.env.DOMAIN_URL
+const URL = process.env.REACT_APP_DOMAIN_URL
 const API = axios.create({baseURL: URL})
 
 export const userChats = (id) => API.get(`/chat/${id}`)
