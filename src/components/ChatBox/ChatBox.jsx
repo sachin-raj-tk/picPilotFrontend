@@ -10,7 +10,8 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receiveMessage }) => {
     const [messages,setMessages] = useState([])
     const [newMessage,setNewMessage] = useState("")
     const scroll = useRef()
-    
+    const phase = process.env.REACT_APP_PHASE
+    const FOLDER = phase === "testing" ? process.env.REACT_APP_PUBLIC_FOLDER_TESTING : process.env.REACT_APP_PUBLIC_FOLDER;
     useEffect(()=>{
         if(receiveMessage !== null && receiveMessage.chatId === chat._id){
             setMessages([...messages,receiveMessage])
@@ -91,7 +92,7 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receiveMessage }) => {
                         <div className="follower">
                             <div>
                                 
-                                <img src={userData?.profilePicture ? process.env.REACT_APP_PUBLIC_FOLDER + userData.profilePicture : process.env.REACT_APP_PUBLIC_FOLDER + 'defaultProfileImg.jpg'} alt="" className='followerImage' style={{ width: '50px', height: '50px' }} />
+                                <img src={userData?.profilePicture ? FOLDER + userData.profilePicture : FOLDER + 'defaultProfileImg.jpg'} alt="" className='followerImage' style={{ width: '50px', height: '50px' }} />
                                 <div className="name" style={{ fontSize: "0.8rem" }}>
                                     <span>{userData?.firstname} {userData?.lastname}</span>
                                     

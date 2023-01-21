@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-
-const URL = process.env.REACT_APP_DOMAIN_URL
+const phase = process.env.REACT_APP_PHASE
+const URL = phase === "testing"? process.env.REACT_APP_DOMAIN_URL_TESTING : process.env.REACT_APP_DOMAIN_URL;
 const API = axios.create({baseURL: URL})
 
 export const logIn = (formData) => API.post('/auth/login',formData)

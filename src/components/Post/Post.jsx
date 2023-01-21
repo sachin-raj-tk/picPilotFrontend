@@ -30,6 +30,11 @@ const Post = ({ data }) => {
    const [showModal,setShowModal] = useState(false)
    const [open, setOpen] = useState(false)
    const [commentString, setCommentString] = useState("")
+
+   const phase = process.env.REACT_APP_PHASE
+   const FOLDER = phase === "testing" ? process.env.REACT_APP_PUBLIC_FOLDER_TESTING : process.env.REACT_APP_PUBLIC_FOLDER;
+   
+
    useEffect(() => {
       const fetchUser = async () => {
          const postedUser = await getUser(data.userId)
@@ -69,7 +74,7 @@ const Post = ({ data }) => {
    return (
       <div className="Post">
          <span className="postTime">Posted {format(data.createdAt)}</span>
-         <img src={data.image ? process.env.REACT_APP_PUBLIC_FOLDER + data.image : ""} alt="" />
+         <img src={data.image ? FOLDER + data.image : ""} alt="" />
          <div className="postReact">
             <img src={liked ? like : notlike} alt="" style={{ cursor: "pointer" }} onClick={handleLike} />
             <img src={comment} onClick={handleCommentBox} alt="" />

@@ -8,7 +8,11 @@ import { getUser } from '../../actions/userAction'
 const ProfileCard = ({location,person}) => {
     const {user} = useSelector((state)=>state.authReducer.authData)
     const posts = useSelector((state)=>state.postReducer.posts)
-    const serverPublic = process.env.REACT_APP_PUBLIC_FOLDER
+
+    const phase = process.env.REACT_APP_PHASE
+    const FOLDER = phase === "testing" ? process.env.REACT_APP_PUBLIC_FOLDER_TESTING : process.env.REACT_APP_PUBLIC_FOLDER;
+
+    const serverPublic = FOLDER
     const dispatch = useDispatch()
     const setUser=()=>{
         dispatch(getUser(user._id))
