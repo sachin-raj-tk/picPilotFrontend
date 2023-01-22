@@ -33,7 +33,7 @@ const Post = ({ data }) => {
 
    const phase = process.env.REACT_APP_PHASE
    const FOLDER = phase === "testing" ? process.env.REACT_APP_PUBLIC_FOLDER_TESTING : process.env.REACT_APP_PUBLIC_FOLDER;
-   
+   console.log(phase, FOLDER,'post.jsx phase value and folder value');
 
    useEffect(() => {
       const fetchUser = async () => {
