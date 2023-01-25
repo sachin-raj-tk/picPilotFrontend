@@ -1,3 +1,4 @@
+import { toast } from 'react-hot-toast'
 import * as AuthApi from '../api/AuthRequest.js'
 
 export const logIn = (formData) => async(dispatch) => {
@@ -5,10 +6,12 @@ export const logIn = (formData) => async(dispatch) => {
     try {
         const {data} = await AuthApi.logIn(formData)
         dispatch({type:"AUTH_SUCCESS", data: data})
-        
+        toast.success("Login Success")
+        console.log(data,'authaction loggin')
     } catch (error) {
         console.log(error);
         dispatch({type:"AUTH_FAIL"})
+        toast.error(error.response.data)
     }
 }
 

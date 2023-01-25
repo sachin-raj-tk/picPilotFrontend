@@ -7,6 +7,7 @@ import Chat from "./pages/Chat/Chat";
 import { Home } from "./pages/home/Home";
 import Profile from "./pages/Profile/Profile";
 import AdminPage from "./pages/AdiminPage/AdminPage.jsx"
+import { Toaster } from "react-hot-toast";
 function App() {
   const user = useSelector((state) => state.authReducer.authData);
 
@@ -15,8 +16,9 @@ function App() {
       <>
         <div className="blur" style={{ top: "-18%", right: "0" }}></div>
         <div className="blur" style={{ top: "36%", left: "-8rem" }}></div>
-
+        <Toaster position="top-center" reverseOrder={false} />
         <Routes>
+          
           <Route
             path="/"
             element={user ? <Navigate to="home" /> : <Navigate to="auth" />}
@@ -41,7 +43,7 @@ function App() {
             path="/otpverification"
             element={user ? <Navigate to="../home" /> : <OtpVerification />}
           />
-          <Route path="/admin" element={<AdminPage/>}/>
+          <Route path="/admin" element={user?.isAdmin?<AdminPage/>:<Navigate to="../auth"/>}/>
         </Routes>
       </>
       

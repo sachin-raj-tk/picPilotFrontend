@@ -6,6 +6,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import { logIn } from '../../actions/AuthAction.js'
 import { signUp } from '../../api/AuthRequest'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-hot-toast'
 
 
 const Auth = () => {
@@ -23,7 +24,7 @@ const Auth = () => {
 
   const handleSubmit = async(e) => {
     e.preventDefault()
-
+    
     if (isSignUp) {
       if(data.password === data.confirmpass){
        const response = await signUp(data)
@@ -38,7 +39,9 @@ const Auth = () => {
       }
       // data.password === data.confirmpass ? await signUp(data) : setConfirmPass(false)
     }else{
-      dispatch(logIn(data))
+      await dispatch(logIn(data))
+      // if(response) toast.success(response);
+      
     }
   }
 

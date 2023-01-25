@@ -1,13 +1,14 @@
 import React from 'react'
 import './AdminPage.css'
 import Sidebar from '../../components/Sidebar/Sidebar'
+import MainDash from '../../components/MainDash/MainDash'
 
 const AdminPage = () => {
   return (
        <div className="adminPage">
         <div className='AppGlass'>
           <Sidebar/>
-          AdminCenter
+          <MainDash/>
         </div>
        </div>
     )
