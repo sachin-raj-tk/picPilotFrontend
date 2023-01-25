@@ -8,8 +8,13 @@ import { Home } from "./pages/home/Home";
 import Profile from "./pages/Profile/Profile";
 import AdminPage from "./pages/AdiminPage/AdminPage.jsx"
 import { Toaster } from "react-hot-toast";
+import { useState } from "react";
+import { useEffect } from "react";
 function App() {
   const user = useSelector((state) => state.authReducer.authData);
+  const admin = user?.user.isAdmin?true:false
+ 
+  console.log(admin,'app.js is admin ane')
 
   return (
     <div className="App">
@@ -21,11 +26,11 @@ function App() {
           
           <Route
             path="/"
-            element={user ? <Navigate to="home" /> : <Navigate to="auth" />}
+            element={admin && user ? <Navigate to="/admin" />:user && !admin?<Navigate to="home" /> : <Navigate to="auth" />}
           />
           <Route
             path="/home"
-            element={user ? <Home /> : <Navigate to="../auth" />}
+            element={admin && user ? <Navigate to="/admin" />:user && !admin ? <Home /> : <Navigate to="../auth" />}
           />
           <Route
             path="/auth"
@@ -43,7 +48,7 @@ function App() {
             path="/otpverification"
             element={user ? <Navigate to="../home" /> : <OtpVerification />}
           />
-          <Route path="/admin" element={user?.isAdmin?<AdminPage/>:<Navigate to="../auth"/>}/>
+          <Route path="/admin" element={admin && user?<AdminPage/>:<Navigate to="../auth"/>}/>
         </Routes>
       </>
       

@@ -4,9 +4,15 @@ import { UilSignOutAlt } from '@iconscout/react-unicons'
 import { SidebarData } from '../../Data/SidebarData'
 import Logo from '../../img/logo.png'
 import { useState } from 'react'
+import { logOut } from '../../actions/AuthAction'
+import { useDispatch } from 'react-redux'
 
 
 const Sidebar = () => {
+  const dispatch = useDispatch()
+  const handleLogOut =() =>{
+    dispatch(logOut())
+}
   
   const [selected,setSelected] = useState(0)
 
@@ -37,7 +43,7 @@ const Sidebar = () => {
             )
           })
         }
-        <div className="menuItem">
+        <div className="menuItem" onClick={handleLogOut}>
           <UilSignOutAlt />
         </div>
 
