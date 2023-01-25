@@ -13,6 +13,7 @@ const userReducer = (
         case "UNFOLLOW_USER":
             
             return{...state,userData:{...state.userData,followers:action.data===state.userData._id?[...state.userData.followers.filter((personId)=>personId!==action.currentUserId)]:[...state.userData.followers]}};
+        
         default :
             return state;  
         }

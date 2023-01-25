@@ -5,6 +5,8 @@ import share from '../../img/share.png'
 import like from '../../img/like.png'
 import notlike from '../../img/notlike.png'
 import deletButton from '../../img/deleteButton.png'
+import saved from '../../img/save-fill.png'
+import notSaved from '../../img/save-line.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
 import { getTimelinePosts, likePost } from '../../api/PostRequest'
@@ -15,6 +17,7 @@ import { getUser } from '../../api/UserRequest'
 import { format } from "timeago.js"
 import DeleteComment from '../DeleteComment/DeleteComment.jsx'
 import commentDelete from "../../img/commentDelete.png"
+import { savePostApi } from '../../actions/userAction'
 
 
 
@@ -27,13 +30,14 @@ const Post = ({ data }) => {
    const [likes, setLikes] = useState(data.likes.length)
    const [postMan, setPostMan] = useState()
    const [modalOpen, setModalOpen] = useState(false)
-   const [showModal,setShowModal] = useState(false)
+   const [showModal, setShowModal] = useState(false)
    const [open, setOpen] = useState(false)
+   const [savedPost,setSavedPost] = useState(user.savedposts.includes(data._id))
    const [commentString, setCommentString] = useState("")
-
+    console.log(user,'post.jsx savedpsots')
    const phase = process.env.REACT_APP_PHASE
    const FOLDER = phase === "testing" ? process.env.REACT_APP_PUBLIC_FOLDER_TESTING : process.env.REACT_APP_PUBLIC_FOLDER;
-   console.log(phase, FOLDER,'post.jsx phase value and folder value');
+   console.log(phase, FOLDER, 'post.jsx phase value and folder value');
 
    useEffect(() => {
       const fetchUser = async () => {
@@ -57,14 +61,17 @@ const Post = ({ data }) => {
       setCommentString(commentString)
 
    }
-
+   const handleSave=async()=>{
+      dispatch(savePostApi(user._id,data._id))
+      setSavedPost((prev)=>!prev)
+   }
    const handleSubmit = async (e) => {
       e.preventDefault();
       const comment = {
          comment: commentString,
          commentedUser: user.firstname + ' ' + user.lastname,
          time: Date(),
-         user:user._id
+         user: user._id
       }
 
       dispatch(addComment(data._id, comment))
@@ -78,20 +85,22 @@ const Post = ({ data }) => {
          <div className="postReact">
             <img src={liked ? like : notlike} alt="" style={{ cursor: "pointer" }} onClick={handleLike} />
             <img src={comment} onClick={handleCommentBox} alt="" />
-            <img src={share} alt="" />
+            
+            
             {data.userId === user._id &&
                <>
                   <img src={deletButton} onClick={() => setModalOpen((prev) => !prev)} style={{ width: "28px", height: "28px", display: "flex", alignSelf: 'flex-end' }} alt="" />
                   <PostDeleteModal modalOpen={modalOpen} setModalOpen={setModalOpen} id={data._id} currentUser={user._id} />
                </>
             }
+            <img src={savedPost?saved:notSaved} onClick={handleSave} alt="" />
 
          </div>
          <span style={{ color: "var(--gray)", fontSize: '12px' }}>{likes} likes</span>
          <div className="detail">
             <span><b>{postMan}</b> </span>
             <span>{data.desc}</span>
-            
+
             <hr />
          </div>
 
@@ -103,17 +112,17 @@ const Post = ({ data }) => {
                      <span><b>{com.commentedUser}</b></span>
 
                      <span> {com.comment}</span>
-                     {com.user===user._id  &&
-                     <>
-                     <img src={commentDelete} style={{width:"20px",height:"20px",marginLeft:"20px",cursor:"pointer"}}  onClick={()=>setShowModal((prev)=>!prev)} alt="" />
-                     
-                     <DeleteComment showModal={showModal} setShowModal={setShowModal} postId={data._id} commentId={com._id}  />
-                     </>
+                     {com.user === user._id &&
+                        <>
+                           <img src={commentDelete} style={{ width: "20px", height: "20px", marginLeft: "20px", cursor: "pointer" }} onClick={() => setShowModal((prev) => !prev)} alt="" />
+
+                           <DeleteComment showModal={showModal} setShowModal={setShowModal} postId={data._id} commentId={com._id} />
+                        </>
                      }
                      <div>
-                        <span style={{paddingRight:"10px"}}>{format(com.time)}</span>
+                        <span style={{ paddingRight: "10px" }}>{format(com.time)}</span>
                      </div>
-                        
+
                   </div>
                )
             })

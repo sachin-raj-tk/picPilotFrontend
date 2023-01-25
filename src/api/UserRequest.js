@@ -32,3 +32,5 @@ export const unFollowUser =  (id,data) => API.put(`/user/${id}/unfollow`, data)
 export const getUserData = (query) => API.post(`/user/getdata`,{data:query})
 
 export const blockUser = (id,active) => API.post(`/user/blockuser/${id}`,{data:active})
+
+export const savePostApi = (id,postId) => API.post(`/user/savepostapi/${id}`,{data:postId})

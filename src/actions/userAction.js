@@ -35,3 +35,13 @@ export const getUser = (id) => async(dispatch)=>{
         
      }
 }
+
+export const savePostApi = (id,postId)=> async(dispatch)=>{
+    dispatch({type:"SAVE_POST"})
+    try {
+        const response = await UserApi.savePostApi(id,postId)
+        dispatch({type:"SAVE_POST_SUCCESS",data:postId})
+    } catch (error) {
+        dispatch({type:"SAVE_POST_FAILED"})
+    }
+}
