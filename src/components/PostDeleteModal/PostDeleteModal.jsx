@@ -17,9 +17,11 @@ const PostDeleteModal = ({modalOpen,setModalOpen,id,currentUser}) => {
       overlayColor={theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[2]}
       overlayOpacity={0.02}
       overlayBlur={3}
-      size='55%'
+      size='35%'
       opened = {modalOpen}
       onClose = {()=>setModalOpen(false)}
+      centered={true}
+      withCloseButton={false}
       
     >
      <span style={{display:"flex",flexDirection:"row",gap:"10px"}}>Are you sure you want to delete this post? <button className='button' onClick={handleDelete}>Yes</button></span>

@@ -18,8 +18,8 @@ import { format } from "timeago.js"
 import DeleteComment from '../DeleteComment/DeleteComment.jsx'
 import commentDelete from "../../img/commentDelete.png"
 import { savePostApi } from '../../actions/userAction'
-
-
+import reportPost from '../../img/reportPost.png'
+import ReportPostModal from "../ReportPostModal/ReportPostModal"
 
 
 const Post = ({ data }) => {
@@ -34,6 +34,7 @@ const Post = ({ data }) => {
    const [open, setOpen] = useState(false)
    const [savedPost,setSavedPost] = useState(user.savedposts.includes(data._id))
    const [commentString, setCommentString] = useState("")
+   const [reportPostModalOpen,setReportPostModalOpen] = useState(false)
     console.log(user,'post.jsx savedpsots')
    const phase = process.env.REACT_APP_PHASE
    const FOLDER = phase === "testing" ? process.env.REACT_APP_PUBLIC_FOLDER_TESTING : process.env.REACT_APP_PUBLIC_FOLDER;
@@ -78,9 +79,24 @@ const Post = ({ data }) => {
       setOpen(false)
 
    }
+
+   const reportPostFn =()=>{
+      setReportPostModalOpen(true)
+   }
+
    return (
       <div className="Post">
+         <div className="abovePostPic">
          <span className="postTime">Posted {format(data.createdAt)}</span>
+         {data.userId !== user._id &&
+      
+         <img src={reportPost} alt="" onClick={reportPostFn} style={{width:"15px",cursor:"pointer"}} />
+         }
+         </div>
+         {
+            <ReportPostModal reportPostModalOpen={reportPostModalOpen} setReportPostModalOpen={setReportPostModalOpen}/>
+         }
+         
          <img src={data.image ? FOLDER + data.image : ""} alt="" />
          <div className="postReact">
             <img src={liked ? like : notlike} alt="" style={{ cursor: "pointer" }} onClick={handleLike} />
@@ -93,7 +109,9 @@ const Post = ({ data }) => {
                   <PostDeleteModal modalOpen={modalOpen} setModalOpen={setModalOpen} id={data._id} currentUser={user._id} />
                </>
             }
+            {data.userId !== user._id &&
             <img src={savedPost?saved:notSaved} onClick={handleSave} alt="" />
+            }
 
          </div>
          <span style={{ color: "var(--gray)", fontSize: '12px' }}>{likes} likes</span>

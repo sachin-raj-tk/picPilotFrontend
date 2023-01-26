@@ -1,14 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './AdminPage.css'
 import Sidebar from '../../components/Sidebar/Sidebar'
 import MainDash from '../../components/MainDash/MainDash'
 
 const AdminPage = () => {
+  const [mainDashItem,setMainDashItem] = useState(0)
+  console.log(mainDashItem);
   return (
        <div className="adminPage">
         <div className='AppGlass'>
-          <Sidebar/>
-          <MainDash/>
+          <Sidebar setMainDashItem={setMainDashItem}/>
+          <MainDash mainDashItem={mainDashItem}/>
         </div>
        </div>
     )
