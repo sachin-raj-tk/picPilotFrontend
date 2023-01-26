@@ -7,12 +7,14 @@ import Table from '../Table/Table'
 import ReportedPosts from '../ReportedPosts/ReportedPosts'
 // import Cards from '../Cards/Cards'
 import './MainDash.css'
+import { getReportedPosts } from '../../api/PostRequest'
 
 const MainDash = ({mainDashItem}) => {
   console.log(mainDashItem);
    const {user} = useSelector((state)=>state.authReducer.authData)
    const [usersData,setUsersData] = useState([])
    const [userActive,setuserActive] = useState(false)
+   const [allReportedPosts,setAllReportedPosts] = useState([])
   useEffect(()=>{
      const fetchUsersData = async() =>{
         const users = await getAllUser()
@@ -21,6 +23,19 @@ const MainDash = ({mainDashItem}) => {
       fetchUsersData()
       console.log('woring ano useeffect maindash')
    },[userActive])
+
+
+   useEffect(()=>{
+    const fetchPostData = async() =>{
+      console.log("vilicho");
+      const posts = await getReportedPosts()
+      console.log(posts,'maindash fetchpostdata');
+      setAllReportedPosts(posts.data)
+      console.log(allReportedPosts,'maindash fetchpostdata thanne');
+    }
+    fetchPostData()
+    
+  },[])
    console.log(usersData,'evide usersdata')
   return (
     
@@ -38,7 +53,7 @@ const MainDash = ({mainDashItem}) => {
           mainDashItem === 1 &&
            <div className="reportedPostsTable">
               <h3>Reported Posts</h3>
-              <ReportedPosts/>
+              <ReportedPosts allReportedPosts={allReportedPosts} />
            </div>
         }
     </div>

@@ -9,7 +9,7 @@ import Paper from '@mui/material/Paper';
 import './ReportedPosts.css'
 import { borderRadius } from '@mui/system';
 import { toast } from 'react-hot-toast';
-
+import deleteButton from '../../img/deleteButton.png'
 
 function createData(name, calories, fat, carbs, protein) {
     return { name, calories, fat, carbs, protein };
@@ -48,7 +48,7 @@ const makeStyles=(active)=>{
 
 
 
-export default function BasicTable() {
+export default function BasicTable({allReportedPosts}) {
 
  
 
@@ -70,21 +70,22 @@ export default function BasicTable() {
                         </TableRow>
                     </TableHead>
                     <TableBody className='tableBody'>
-                        
+                        {allReportedPosts.map((post)=>(
                             <TableRow
                             
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
                                 
                                 <TableCell component="th" scope="row">
-                                    
+                                    {post._id}
                                 </TableCell>
-                                <TableCell align="left" ></TableCell>
-                                <TableCell align="left" ></TableCell>
+                                
+                                <TableCell align="left" >{post.reports.map((report,index)=><>{index >=1 && <hr />}<span>{report.reason}</span></>)}</TableCell>
+                                <TableCell align="left" ><img src={deleteButton} style={{width:'20px',paddingLeft:"25px"}} alt="" /></TableCell>
                                 {/* <TableCell align="left">{row.carbs}</TableCell> */}
                                 {/* <TableCell align="left"></TableCell> */}
                             </TableRow>
-                        
+                        ))}
                     </TableBody>
                 </Table>
             </TableContainer>

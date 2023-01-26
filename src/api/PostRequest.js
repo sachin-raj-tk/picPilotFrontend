@@ -15,3 +15,7 @@ export const addComment = (id,comment) => API.put(`/post/${id}/comment`,comment)
 export const deleteComment =(id,commentId) => API.post(`/post/${id}/deleteComment`,{commentId:commentId})
 
 export const deletePost = (id,currentUser) => API.post(`/post/${id}/delete`,{currentUser:currentUser})
+
+export const ReportPost = (reportData,postId) => API.post(`/post/reportpost/${postId}`,reportData)
+
+export const getReportedPosts = () => API.post(`/post/getreportedposts`)

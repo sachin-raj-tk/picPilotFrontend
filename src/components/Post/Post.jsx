@@ -94,7 +94,7 @@ const Post = ({ data }) => {
          }
          </div>
          {
-            <ReportPostModal reportPostModalOpen={reportPostModalOpen} setReportPostModalOpen={setReportPostModalOpen}/>
+            <ReportPostModal reportPostModalOpen={reportPostModalOpen} setReportPostModalOpen={setReportPostModalOpen} userId={user._id} postId={data._id}/>
          }
          
          <img src={data.image ? FOLDER + data.image : ""} alt="" />
