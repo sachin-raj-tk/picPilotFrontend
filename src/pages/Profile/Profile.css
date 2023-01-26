@@ -10,3 +10,13 @@
     flex-direction: column;
     gap: 1rem;
 }
+
+.verifyRequest{
+    color:aquamarine !important;
+}
+
+.verifyRequestSend{
+    cursor: default !important;
+    color:aquamarine !important;
+
+}

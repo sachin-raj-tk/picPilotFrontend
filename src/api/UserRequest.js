@@ -34,3 +34,5 @@ export const getUserData = (query) => API.post(`/user/getdata`,{data:query})
 export const blockUser = (id,active) => API.post(`/user/blockuser/${id}`,{data:active})
 
 export const savePostApi = (id,postId) => API.post(`/user/savepostapi/${id}`,{data:postId})
+
+export const sendVerifiyRequest =(userId) => API.post(`/user/isfamousrequest/${userId}`)

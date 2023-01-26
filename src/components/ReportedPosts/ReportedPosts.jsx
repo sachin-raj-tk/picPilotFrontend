@@ -64,7 +64,7 @@ export default function BasicTable({allReportedPosts}) {
                         <TableRow>
                             <TableCell>Post ID</TableCell>
                             <TableCell align="left">Reports</TableCell>
-                            <TableCell align="left">DeletePost</TableCell>
+                            <TableCell align="left">Delete Post</TableCell>
                             {/* <TableCell align="left"></TableCell>
                             <TableCell align="left">Protein&nbsp;(g)</TableCell> */}
                         </TableRow>
@@ -81,7 +81,7 @@ export default function BasicTable({allReportedPosts}) {
                                 </TableCell>
                                 
                                 <TableCell align="left" >{post.reports.map((report,index)=><>{index >=1 && <hr />}<span>{report.reason}</span></>)}</TableCell>
-                                <TableCell align="left" ><img src={deleteButton} style={{width:'20px',paddingLeft:"25px"}} alt="" /></TableCell>
+                                <TableCell align="left" ><img src={deleteButton} style={{width:'20px',marginLeft:"25px",cursor:"pointer"}} alt="" /></TableCell>
                                 {/* <TableCell align="left">{row.carbs}</TableCell> */}
                                 {/* <TableCell align="left"></TableCell> */}
                             </TableRow>
