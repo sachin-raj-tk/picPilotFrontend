@@ -15,8 +15,33 @@
     height: 97%;
     width: 100%;
     /* margin-top: 0.5rem; */
-    border-radius: 2rem;
+    /* border-radius: 2rem;*/
     background-color: var(--glass);
     overflow: hidden;
     grid-template-columns: 12rem auto;
 }
+
+
+
+
+/* my testing */
+/* .AppGlass{
+    display: flex;
+    height: 97%;
+    width: 100%;
+    background-color: var(--glass);
+    overflow: hidden;
+    
+}
+
+.admin-left{
+    display: flex;
+    flex-direction: column;
+    width: 15%;
+}
+
+.admin-right{
+    display: flex;
+    flex-direction: column;
+    width: 81%;
+} */

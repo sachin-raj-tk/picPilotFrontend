@@ -32,12 +32,18 @@ const Profile = () => {
 
   return (
     <div className="Profile">
+        <div className='profile-left'>
+
         <ProfileLeft/>
+        </div>
         <div className="Profile-center">
             <ProfileCard location="profilePage" person = {id===user._id?user:person}/>
             <PostSide showSaved={showSaved}/>
         </div>
+        <div className='profile-right'>
+
         <RightSide/>
+        </div>
     </div>
     )
 }

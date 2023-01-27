@@ -8,9 +8,16 @@ export const Home = () => {
   const showSaved = "home"
   return (
   <div className="Home">
+    <div className='home-left'>
+
     <ProfileSid/>
+    </div>
+    <div className='home-center'>
     <PostSide showSaved={showSaved}/>
+    </div>
+    <div className='home-right'>
     <RightSide/>
+    </div>
   </div>
     )
 }
