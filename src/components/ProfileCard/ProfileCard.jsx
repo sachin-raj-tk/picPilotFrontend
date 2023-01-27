@@ -3,7 +3,7 @@ import './ProfileCard.css'
 import {Link} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getUser } from '../../actions/userAction'
-
+import blueTick from '../../img/blueTick.png'
 
 const ProfileCard = ({location,person}) => {
     const {user} = useSelector((state)=>state.authReducer.authData)
@@ -25,11 +25,12 @@ const ProfileCard = ({location,person}) => {
             <img src={person?.profilePicture?serverPublic+ person.profilePicture: !person && user.profilePicture? serverPublic + user.profilePicture : serverPublic + "defaultProfileImg.jpg"} alt="" />
         </div>
         <div className="ProfileName">
-            <span>{person?.firstname?person.firstname:!person && user.firstname? user.firstname:'firstname'} {person?.lastname?person.lastname:!person && user.lastname? user.lastname:''}</span>
+            <span>{person?.firstname?person.firstname:!person && user.firstname? user.firstname:'firstname'}<span> {person?.lastname?person.lastname:!person && user.lastname? user.lastname:''}{person?.isFamous==="true"? <img className='verifiedBlueTick' src={blueTick} alt="" />:!person && user.isFamous==="true"? <img className='verifiedBlueTick' src={blueTick} alt="" />:""}</span></span>
             <span>{person?.worksAt? person.worksAt :!person && user.worksAt? user.worksAt : "Write about yourself"}</span>
         </div>
         <div className="followStatus">
             <hr />
+            
             <div>
                 <div className="follow">
                     <span>{person?.following?person.following.length:user.following.length}</span>

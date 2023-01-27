@@ -79,7 +79,7 @@ const FollowersCard = ({locality}) => {
         {currentPersonsList.map((person)=>
           
           (
-            <User person = {person}  list="people"/>
+            <User person = {person}  list="people" id={person._id}/>
           )
         
         )}
@@ -96,7 +96,7 @@ const FollowersCard = ({locality}) => {
           
           (
             
-            <User person = {person}  list="followingPeople"/>
+            <User person = {person}  list="followingPeople" id={person._id}/>
             
             
           )
@@ -113,7 +113,7 @@ const FollowersCard = ({locality}) => {
         {currentFollowersList.map((person)=>
           
             (
-              <User person = {person}  list="followersPeople"/>
+              <User person = {person}  list="followersPeople" id={person._id}/>
               )
             
           )}

@@ -5,6 +5,7 @@ import MuiAccordion from '@mui/material/Accordion';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
+import { makeIsFamous } from '../../api/UserRequest';
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -42,15 +43,21 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
   borderTop: '1px solid rgba(0, 0, 0, .125)',
 }));
 
-export default function AdminNotifications({allVerifyNotifications}) {
+export default function AdminNotifications({allVerifyNotifications,setIsFamousMadeTrue}) {
   const [expanded, setExpanded] = React.useState(0);
 
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
 
+const handleVerify =async(id)=>{
+    const response = await makeIsFamous(id)
+    setIsFamousMadeTrue(true)
+}
+
   return (
     <div className='AdminNotificationAcordian'>
+        
     {allVerifyNotifications.map((id,index)=>(
       <Accordion expanded={expanded === index} onChange={handleChange(index)}>
         <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
@@ -58,7 +65,7 @@ export default function AdminNotifications({allVerifyNotifications}) {
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            <span> User with id : <b>{id}</b> has requested for verifiying his account. Please review and Verify.</span><button className='button' >Verify</button>
+            <span> User with id : <b>{id}</b> has requested for verifiying his account. Please review and Verify.</span><button className='button' onClick={()=>handleVerify(id)}>Verify</button>
           </Typography>
         </AccordionDetails>
       </Accordion>

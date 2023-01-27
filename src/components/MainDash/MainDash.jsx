@@ -17,6 +17,7 @@ const MainDash = ({mainDashItem}) => {
    const [userActive,setuserActive] = useState(false)
    const [allReportedPosts,setAllReportedPosts] = useState([])
    const [allVerifyNotifications,setAllVerifyNotifications] = useState([])
+   const [isFamousMadeTrue,setIsFamousMadeTrue] = useState(false)
   useEffect(()=>{
      const fetchUsersData = async() =>{
         const users = await getAllUser()
@@ -48,7 +49,7 @@ const MainDash = ({mainDashItem}) => {
     setAllVerifyNotifications(verifyNotifications.data)
    }
    fetchVerifyNotifications()
-  },[mainDashItem])
+  },[mainDashItem,isFamousMadeTrue])
   
   console.log(allVerifyNotifications,'maindash line53');
   return (
@@ -60,7 +61,10 @@ const MainDash = ({mainDashItem}) => {
           mainDashItem === 0 &&
         <div className='NotificationsAcordian'> 
           <h3>Notifications</h3>
-          <AdminNotifications allVerifyNotifications={allVerifyNotifications}/>
+          {allVerifyNotifications.length > 0 ?
+          <AdminNotifications allVerifyNotifications={allVerifyNotifications} setIsFamousMadeTrue={setIsFamousMadeTrue}/>:
+          <span>No new verification requests yet</span>
+          }
         </div>
         }
         {mainDashItem === 1 &&

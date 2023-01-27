@@ -93,3 +93,8 @@
     margin-bottom: 1rem;
     cursor: pointer;
 }
+
+.verifiedBlueTick{
+    padding: 10px 0 0 5px;
+    width: 20px;
+}

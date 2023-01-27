@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { getTimelinePosts } from '../../actions/postAction'
 import { followUser, getUser, unFollowUser } from '../../actions/userAction'
 
-const User = ({person,list}) => {
+const User = ({person,list,id}) => {
   const dispatch = useDispatch()
   const {user} =useSelector((state)=>state.authReducer.authData)
   const [following, setFollowing] = useState(person.followers.includes(user._id))
@@ -34,7 +34,7 @@ const User = ({person,list}) => {
   },[user])
   
   return (
-    <div className="follower">
+    <div className="follower" id={id}>
               <div>
                 <img src={person.profilePicture? serverPublic + person.profilePicture : serverPublic + "defaultProfileImg.jpg"} alt="" className="followerImage" />
                 <div className="name">
