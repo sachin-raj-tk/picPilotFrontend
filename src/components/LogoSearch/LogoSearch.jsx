@@ -46,7 +46,7 @@ const LogoSearch = ({setNewUser,place}) => {
             <UilSearch/>
         </div>
     </div>
-    <div class="dropdown-content">
+    <div className="dropdown-content">
       {place === "chatPage" ?data.map((person)=>(
         <>
       <p onClick={()=>setNewUser(person)} style={{cursor:"pointer"}}>{person.firstname}</p>

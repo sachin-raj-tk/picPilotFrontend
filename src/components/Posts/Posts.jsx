@@ -11,6 +11,9 @@ const Posts = () => {
   const {user} = useSelector((state)=>state.authReducer.authData)
   
   let {posts,loading} = useSelector((state)=>state.postReducer)
+  
+  posts = posts.filter((post)=>post.removed===false)
+  
   const postReducer = useSelector((state)=>state.postReducer)
   console.log(JSON.stringify(postReducer),'posts.jsx')
   const params = useParams()
