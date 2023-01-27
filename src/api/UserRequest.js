@@ -40,6 +40,10 @@ export const savePostApi = (id,postId) => API.post(`/user/savepostapi/${id}`,{da
 
 export const sendVerifiyRequest =(userId) => API.post(`/user/isfamousrequest/${userId}`)
 
+// request by admin
+
 export const getVerifyNotifications = () => API.post(`user/getverifynotifications`)
 
 export const makeIsFamous = (id) => API.post(`/user/makeisfamous/${id}`)
+
+

@@ -19,3 +19,8 @@ export const deletePost = (id,currentUser) => API.post(`/post/${id}/delete`,{cur
 export const ReportPost = (reportData,postId) => API.post(`/post/reportpost/${postId}`,reportData)
 
 export const getReportedPosts = () => API.post(`/post/getreportedposts`)
+
+
+// request by admin
+
+export const reportedPostRemove =(postId) => API.post(`/post/reportedpostremove/${postId}`)

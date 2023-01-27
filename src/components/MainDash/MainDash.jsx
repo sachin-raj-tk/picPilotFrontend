@@ -18,6 +18,7 @@ const MainDash = ({mainDashItem}) => {
    const [allReportedPosts,setAllReportedPosts] = useState([])
    const [allVerifyNotifications,setAllVerifyNotifications] = useState([])
    const [isFamousMadeTrue,setIsFamousMadeTrue] = useState(false)
+   const [reportedPostsUseEffect,setReportedPostsUseEffect] = useState(false)
   useEffect(()=>{
      const fetchUsersData = async() =>{
         const users = await getAllUser()
@@ -38,7 +39,7 @@ const MainDash = ({mainDashItem}) => {
     }
     fetchPostData()
     
-  },[])
+  },[reportedPostsUseEffect])
 
    
    console.log(usersData,'evide usersdata')
@@ -62,7 +63,7 @@ const MainDash = ({mainDashItem}) => {
         <div className='NotificationsAcordian'> 
           <h3>Notifications</h3>
           {allVerifyNotifications.length > 0 ?
-          <AdminNotifications allVerifyNotifications={allVerifyNotifications} setIsFamousMadeTrue={setIsFamousMadeTrue}/>:
+          <AdminNotifications allVerifyNotifications={allVerifyNotifications} setIsFamousMadeTrue={setIsFamousMadeTrue} reportedPostsUseEffect={reportedPostsUseEffect}/>:
           <span>No new verification requests yet</span>
           }
         </div>
@@ -78,7 +79,7 @@ const MainDash = ({mainDashItem}) => {
           mainDashItem === 2 &&
            <div className="reportedPostsTable">
               <h3>Reported Posts</h3>
-              <ReportedPosts allReportedPosts={allReportedPosts} />
+              <ReportedPosts allReportedPosts={allReportedPosts} setReportedPostsUseEffect={setReportedPostsUseEffect} />
            </div>
         }
     </div>

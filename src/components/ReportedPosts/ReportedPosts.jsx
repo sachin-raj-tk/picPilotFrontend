@@ -9,7 +9,9 @@ import Paper from '@mui/material/Paper';
 import './ReportedPosts.css'
 import { borderRadius } from '@mui/system';
 import { toast } from 'react-hot-toast';
-import deleteButton from '../../img/deleteButton.png'
+import deleteButton from '../../img/deleteButton.png';
+import switcher from '../../img/switch.png'
+import { reportedPostRemove } from '../../api/PostRequest';
 
 function createData(name, calories, fat, carbs, protein) {
     return { name, calories, fat, carbs, protein };
@@ -48,9 +50,13 @@ const makeStyles=(active)=>{
 
 
 
-export default function BasicTable({allReportedPosts}) {
+export default function BasicTable({allReportedPosts,setReportedPostsUseEffect,reportedPostsUseEffect}) {
 
- 
+ const handlePostRemove=async(postId)=>{
+      const response = await reportedPostRemove(postId)
+      setReportedPostsUseEffect((prev)=>!prev)
+      
+ }
 
  
 
@@ -64,7 +70,7 @@ export default function BasicTable({allReportedPosts}) {
                         <TableRow>
                             <TableCell>Post ID</TableCell>
                             <TableCell align="left">Reports</TableCell>
-                            <TableCell align="left">Delete Post</TableCell>
+                            <TableCell align="left">Actions</TableCell>
                             {/* <TableCell align="left"></TableCell>
                             <TableCell align="left">Protein&nbsp;(g)</TableCell> */}
                         </TableRow>
@@ -81,7 +87,7 @@ export default function BasicTable({allReportedPosts}) {
                                 </TableCell>
                                 
                                 <TableCell align="left" >{post.reports.map((report,index)=><>{index >=1 && <hr />}<span>{report.reason}</span></>)}</TableCell>
-                                <TableCell align="left" ><img src={deleteButton} style={{width:'20px',marginLeft:"25px",cursor:"pointer"}} alt="" /></TableCell>
+                                <TableCell align="left" >{!post.removed?<span>Block<img src={deleteButton} style={{width:'20px',marginLeft:"15px",cursor:"pointer"}} alt=""  onClick={()=>handlePostRemove(post._id)}/></span>:<span>unBlock<img src={switcher} style={{width:'20px',marginLeft:"15px",cursor:"pointer"}} alt=""  onClick={()=>handlePostRemove(post._id)}/></span>}</TableCell>
                                 {/* <TableCell align="left">{row.carbs}</TableCell> */}
                                 {/* <TableCell align="left"></TableCell> */}
                             </TableRow>
