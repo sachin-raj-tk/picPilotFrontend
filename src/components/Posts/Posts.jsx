@@ -6,7 +6,7 @@ import './Posts.css'
 import { getTimelinePosts } from '../../actions/postAction'
 import { useParams } from 'react-router-dom'
 
-const Posts = () => {
+const Posts = ({savedPosts}) => {
   const dispatch = useDispatch()
   const {user} = useSelector((state)=>state.authReducer.authData)
   
@@ -24,6 +24,8 @@ const Posts = () => {
   
   if(!posts) return "no posts";
   if(params.id) posts = posts.filter((post)=> post.userId === params.id)
+  if(savedPosts===2) posts = posts.filter((post)=> post.userId === user._id)
+  if(savedPosts===1) posts = posts.filter((post)=> user.savedposts.includes(post._id))
   return (
      <div className="Posts">
         {loading?"Fetching posts...":

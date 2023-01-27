@@ -11,6 +11,7 @@ const Profile = () => {
 
     const {user} = useSelector((state)=>state.authReducer.authData)
     const person = useSelector((state)=>state.userReducer.userData)
+    const showSaved = "profile"
     
     // const [person,setPerson] = useState({})
     // const dispatch = useDispatch()
@@ -34,7 +35,7 @@ const Profile = () => {
         <ProfileLeft/>
         <div className="Profile-center">
             <ProfileCard location="profilePage" person = {id===user._id?user:person}/>
-            <PostSide/>
+            <PostSide showSaved={showSaved}/>
         </div>
         <RightSide/>
     </div>

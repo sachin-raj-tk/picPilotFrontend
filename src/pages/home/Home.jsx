@@ -5,10 +5,11 @@ import RightSide from '../../components/RightSide/RightSide'
 import './Home.css'
 
 export const Home = () => {
+  const showSaved = "home"
   return (
   <div className="Home">
     <ProfileSid/>
-    <PostSide/>
+    <PostSide showSaved={showSaved}/>
     <RightSide/>
   </div>
     )
