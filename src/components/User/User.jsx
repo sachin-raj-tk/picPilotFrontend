@@ -46,7 +46,7 @@ const User = ({person,list,id}) => {
                 </div>
                 
               </div>
-              <button className={following? "button fc-button UnfollowButton":"button fc-button"} onClick={handleFollow}>
+              <button className={user.following.includes(person._id)? "button fc-button UnfollowButton":"button fc-button"} onClick={handleFollow}>
                   {following? 'Unfollow':'Follow'}
               </button>
             </div>
