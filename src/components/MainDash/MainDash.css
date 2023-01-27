@@ -18,3 +18,13 @@
     margin-left: 4rem;
     margin-top: 4rem;
 }
+
+.NotificationsAcordian>h3{
+    /* margin-left: 4rem; */
+    margin-top: 4rem;
+}
+
+.NotificationsAcordian{
+    padding-left: 3rem! important;
+    width: 90% !important;
+}

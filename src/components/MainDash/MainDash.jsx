@@ -2,12 +2,13 @@ import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { getAllUser } from '../../api/UserRequest'
+import { getAllUser, getVerifyNotifications } from '../../api/UserRequest'
 import Table from '../Table/Table'
 import ReportedPosts from '../ReportedPosts/ReportedPosts'
 // import Cards from '../Cards/Cards'
 import './MainDash.css'
 import { getReportedPosts } from '../../api/PostRequest'
+import AdminNotifications from '../AdminNotifications/AdminNotifications'
 
 const MainDash = ({mainDashItem}) => {
   console.log(mainDashItem);
@@ -15,6 +16,7 @@ const MainDash = ({mainDashItem}) => {
    const [usersData,setUsersData] = useState([])
    const [userActive,setuserActive] = useState(false)
    const [allReportedPosts,setAllReportedPosts] = useState([])
+   const [allVerifyNotifications,setAllVerifyNotifications] = useState([])
   useEffect(()=>{
      const fetchUsersData = async() =>{
         const users = await getAllUser()
@@ -36,13 +38,32 @@ const MainDash = ({mainDashItem}) => {
     fetchPostData()
     
   },[])
+
+   
    console.log(usersData,'evide usersdata')
+
+  useEffect(()=>{
+    const fetchVerifyNotifications=async()=>{
+    const verifyNotifications = await getVerifyNotifications()
+    setAllVerifyNotifications(verifyNotifications.data)
+   }
+   fetchVerifyNotifications()
+  },[mainDashItem])
+  
+  console.log(allVerifyNotifications,'maindash line53');
   return (
     
     <div className="MainDash">
         {/* <h1>Dashboard</h1> */}
         {/* <Cards/> */}
-        {mainDashItem === 0 &&
+        {
+          mainDashItem === 0 &&
+        <div className='NotificationsAcordian'> 
+          <h3>Notifications</h3>
+          <AdminNotifications allVerifyNotifications={allVerifyNotifications}/>
+        </div>
+        }
+        {mainDashItem === 1 &&
         <div className='usersTable'>
         <h3>All users</h3>
 
@@ -50,7 +71,7 @@ const MainDash = ({mainDashItem}) => {
         </div>
         }
         {
-          mainDashItem === 1 &&
+          mainDashItem === 2 &&
            <div className="reportedPostsTable">
               <h3>Reported Posts</h3>
               <ReportedPosts allReportedPosts={allReportedPosts} />

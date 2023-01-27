@@ -29,6 +29,9 @@ export const followUser =  (id,data) => API.put(`/user/${id}/follow`, data)
 
 export const unFollowUser =  (id,data) => API.put(`/user/${id}/unfollow`, data)
 
+
+// request by admin
+
 export const getUserData = (query) => API.post(`/user/getdata`,{data:query})
 
 export const blockUser = (id,active) => API.post(`/user/blockuser/${id}`,{data:active})
@@ -36,3 +39,5 @@ export const blockUser = (id,active) => API.post(`/user/blockuser/${id}`,{data:a
 export const savePostApi = (id,postId) => API.post(`/user/savepostapi/${id}`,{data:postId})
 
 export const sendVerifiyRequest =(userId) => API.post(`/user/isfamousrequest/${userId}`)
+
+export const getVerifyNotifications = () => API.post(`user/getverifynotifications`)

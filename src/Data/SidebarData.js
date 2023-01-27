@@ -7,10 +7,10 @@ import{
 } from "@iconscout/react-unicons"
 
 export const SidebarData = [
-    // {
-    //     icon: UilEstate,
-    //     heading: "Dashboard"
-    // },
+    {
+        icon: UilEstate,
+        heading: "Dashboard"
+    },
     // {
     //     icon: UilClipboardAlt,
     //     heading: "Orders"
