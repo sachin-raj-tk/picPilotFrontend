@@ -34,7 +34,9 @@ const authReducer = (
         case "SAVE_POST_SUCCESS":
             return{...state,authData:{...state.authData,user:{...state.authData.user,savedposts:state.authData.user.savedposts.includes(action.data)?[...state.authData.user.savedposts.filter((eachpostId)=>eachpostId !== action.data)]:[...state.authData.user.savedposts,action.data]}},loading:false,error:false};
         case  "SAVE_POST_FAILED":
-            return{...state,loading:false,error:true}
+            return{...state,loading:false,error:true};
+        case "SEND_ISFAMOUS_REQUEST":
+            return{...state,authData:{...state.authData,user:{...state.authData.user,isFamous:"pending"}}};
         case "LOG_OUT":
             localStorage.clear();
             return {...state,authData: null,loading:false,error:false}
