@@ -1,10 +1,13 @@
 import { Modal, Radio  } from '@mantine/core';
 import { useState } from 'react';
-import { ReportPost } from '../../api/PostRequest';
+import { useDispatch } from 'react-redux';
+import { ReportPost } from '../../actions/postAction';
+
 import './ReportPostModal.css'
 
 function ReportPostModal({reportPostModalOpen,setReportPostModalOpen,userId,postId}) {
     const [value, setValue] = useState(null)
+    const dispatch = useDispatch()
     console.log(value,'report post modal');
     const reportThisPost=async()=>{
        const reportData = {
@@ -13,7 +16,7 @@ function ReportPostModal({reportPostModalOpen,setReportPostModalOpen,userId,post
        } 
        console.log(reportData,'reportpost model reporthispost function');
        setReportPostModalOpen(false)
-       const response = await ReportPost(reportData,postId)
+       const response = await dispatch(ReportPost(reportData,postId)) 
     }
   return (
     <Modal 

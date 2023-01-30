@@ -65,3 +65,27 @@ export const deletePost=(id,currentUser)=> async(dispatch)=>{
            }
     }
 }
+
+
+export const likePost = (id,userId) => async(dispatch) =>{
+    try {
+        await PostApi.likePost(id,userId)
+    } catch (error) {
+        if(error.response.data === "token expired"){
+            
+            dispatch({type:"LOG_OUT"})
+           }
+    }
+}
+
+
+export const ReportPost =(reportData,postId) => async (dispatch) => {
+    try {
+       return await PostApi.ReportPost(reportData,postId)
+    } catch (error) {
+        if(error.response.data === "token expired"){
+            
+            dispatch({type:"LOG_OUT"})
+           }
+    }
+}

@@ -9,9 +9,9 @@ import saved from '../../img/save-fill.png'
 import notSaved from '../../img/save-line.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { useState } from 'react'
-import { getTimelinePosts, likePost } from '../../api/PostRequest'
+import { getTimelinePosts} from '../../api/PostRequest'
 import InputEmoji from 'react-input-emoji'
-import { addComment } from '../../actions/postAction'
+import { addComment, likePost } from '../../actions/postAction'
 import PostDeleteModal from '../PostDeleteModal/PostDeleteModal.jsx'
 import { getUser } from '../../api/UserRequest'
 import { format } from "timeago.js"
@@ -50,7 +50,7 @@ const Post = ({ data }) => {
 
    const handleLike = () => {
       setLiked((prev) => !prev)
-      likePost(data._id, user._id)
+       dispatch(likePost(data._id, user._id))
       // setLikes(data.likes.length)
       liked ? setLikes((prev) => prev - 1) : setLikes((prev) => prev + 1)
    }
