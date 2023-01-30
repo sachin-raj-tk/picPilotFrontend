@@ -12,9 +12,16 @@ export const updateUser = (id, formData) => async(dispatch) => {
 }
 
 export const followUser = (id,data) => async(dispatch)=>{
-     UserApi.followUser(id,data)
-     console.log(data,'useraction, followuser');
+    try {
+      const response = await UserApi.followUser(id,data)
+     console.log(response,'useraction, followuser');
     dispatch({type: "FOLLOW_USER",data:id,currentUserId:data._id})
+    } catch (error) {
+        console.log(error.response.data === "token expired",'follow user error'); 
+        if(error.response.data === "token expired") dispatch({type:"LOG_OUT"})
+         
+    }
+     
 }
 
 export const unFollowUser = (id,data) => async(dispatch)=>{
