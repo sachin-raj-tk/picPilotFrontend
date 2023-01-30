@@ -5,7 +5,9 @@ import MuiAccordion from '@mui/material/Accordion';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
-import { makeIsFamous } from '../../api/UserRequest';
+import { makeIsFamous } from '../../actions/userAction';
+import { useDispatch } from 'react-redux';
+
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -44,6 +46,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 }));
 
 export default function AdminNotifications({allVerifyNotifications,setIsFamousMadeTrue}) {
+  const dispatch = useDispatch()
   const [expanded, setExpanded] = React.useState(0);
 
   const handleChange = (panel) => (event, newExpanded) => {
@@ -51,7 +54,7 @@ export default function AdminNotifications({allVerifyNotifications,setIsFamousMa
   };
 
 const handleVerify =async(id)=>{
-    const response = await makeIsFamous(id)
+    const response = await dispatch(makeIsFamous(id)) 
     setIsFamousMadeTrue(true)
 }
 

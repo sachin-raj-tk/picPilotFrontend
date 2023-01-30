@@ -112,6 +112,19 @@ export const getVerifyNotifications = () => async(dispatch) => {
     try {
         return UserApi.getVerifyNotifications()
     } catch (error) {
-        
+        if(error.response.data === "token expired"){
+            dispatch({type:"LOG_OUT"})
+        }
+    }
+}
+
+
+export const makeIsFamous = (id) => async(dispatch) => {
+    try {
+        return await UserApi.makeIsFamous(id)
+    } catch (error) {
+        if(error.response.data === "token expired"){
+            dispatch({type:"LOG_OUT"})
+        }
     }
 }
