@@ -89,3 +89,15 @@ export const ReportPost =(reportData,postId) => async (dispatch) => {
            }
     }
 }
+
+
+export const getReportedPosts = () => async (dispatch) => {
+    try {
+        return await PostApi.getReportedPosts()
+    } catch (error) {
+        if(error.response.data === "token expired"){
+            
+            dispatch({type:"LOG_OUT"})
+           }
+    }
+}

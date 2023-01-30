@@ -1,16 +1,18 @@
 import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { getAllUser, getVerifyNotifications } from '../../api/UserRequest'
 import Table from '../Table/Table'
 import ReportedPosts from '../ReportedPosts/ReportedPosts'
 // import Cards from '../Cards/Cards'
 import './MainDash.css'
-import { getReportedPosts } from '../../api/PostRequest'
+
 import AdminNotifications from '../AdminNotifications/AdminNotifications'
+import { getReportedPosts } from '../../actions/postAction'
 
 const MainDash = ({mainDashItem}) => {
+  const dispatch = useDispatch()
   console.log(mainDashItem);
    const {user} = useSelector((state)=>state.authReducer.authData)
    const [usersData,setUsersData] = useState([])
@@ -32,7 +34,7 @@ const MainDash = ({mainDashItem}) => {
    useEffect(()=>{
     const fetchPostData = async() =>{
       console.log("vilicho");
-      const posts = await getReportedPosts()
+      const posts = await dispatch(getReportedPosts()) 
       console.log(posts,'maindash fetchpostdata');
       setAllReportedPosts(posts.data)
       console.log(allReportedPosts,'maindash fetchpostdata thanne');
