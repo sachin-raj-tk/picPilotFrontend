@@ -1,15 +1,18 @@
 import React, { useRef, useState } from 'react'
 import { useEffect } from 'react'
-import { addMessage, getMessages } from '../../api/MessageRequest'
+import { addMessage} from '../../api/MessageRequest'
 import { getUser } from '../../api/UserRequest'
 import './ChatBox.css'
 import {format} from "timeago.js"
 import InputEmoji from 'react-input-emoji'
+import { getMessages } from '../../actions/MessageAction'
+import { useDispatch } from 'react-redux'
 const ChatBox = ({ chat, currentUser, setSendMessage, receiveMessage }) => {
     const [userData, setUserData] = useState(null)
     const [messages,setMessages] = useState([])
     const [newMessage,setNewMessage] = useState("")
     const scroll = useRef()
+    const dispatch = useDispatch()
     const phase = process.env.REACT_APP_PHASE
     const FOLDER = phase === "testing" ? process.env.REACT_APP_PUBLIC_FOLDER_TESTING : process.env.REACT_APP_PUBLIC_FOLDER;
     useEffect(()=>{
@@ -39,7 +42,7 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receiveMessage }) => {
     useEffect(()=>{
         const fetchMessages = async () => {
             try {
-                const {data} = await getMessages(chat._id)
+                const {data} = await dispatch(getMessages(chat._id)) 
                 console.log(data);
                 setMessages(data);
             } catch (error) {
