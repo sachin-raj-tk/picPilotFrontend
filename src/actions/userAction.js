@@ -8,6 +8,10 @@ export const updateUser = (id, formData) => async(dispatch) => {
         dispatch({type: "UPDATING_SUCCESS", data : data})
     } catch (error) {
         dispatch({type: "UPDATING_FAIL"})
+        if(error.response.data === "token expired"){
+            
+            dispatch({type:"LOG_OUT"})
+           }
     }
 }
 
@@ -18,15 +22,26 @@ export const followUser = (id,data) => async(dispatch)=>{
     dispatch({type: "FOLLOW_USER",data:id,currentUserId:data._id})
     } catch (error) {
         console.log(error.response.data === "token expired",'follow user error'); 
-        if(error.response.data === "token expired") dispatch({type:"LOG_OUT"})
+        if(error.response.data === "token expired"){
+            
+         dispatch({type:"LOG_OUT"})
+        }
          
     }
      
 }
 
 export const unFollowUser = (id,data) => async(dispatch)=>{
-     UserApi.unFollowUser(id,data)
-    dispatch({type: "UNFOLLOW_USER",data:id,currentUserId:data._id})
+    try {
+        
+        const response = await UserApi.unFollowUser(id,data)
+         
+        dispatch({type: "UNFOLLOW_USER",data:id,currentUserId:data._id})
+    } catch (error) {
+        if(error.response.data === "token expired"){
+            dispatch({type:"LOG_OUT"})
+        }    
+    }
 }
 
 export const getUser = (id) => async(dispatch)=>{
@@ -39,7 +54,9 @@ export const getUser = (id) => async(dispatch)=>{
         dispatch({type:"USER_DETAILS_FETCHED",data:data})
     } catch (error) {
          dispatch({type:"USER_DETAILS_FETCHING_FAIL"})
-        
+         if(error.response.data === "token expired"){
+            dispatch({type:"LOG_OUT"})
+        }
      }
 }
 
@@ -50,5 +67,8 @@ export const savePostApi = (id,postId)=> async(dispatch)=>{
         dispatch({type:"SAVE_POST_SUCCESS",data:postId})
     } catch (error) {
         dispatch({type:"SAVE_POST_FAILED"})
+        if(error.response.data === "token expired"){
+            dispatch({type:"LOG_OUT"})
+        }
     }
 }

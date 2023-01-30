@@ -10,6 +10,10 @@ export const getTimelinePosts = (id) => async(dispatch)=>{
     } catch (error) {
         dispatch({type: "RETREIVING_FAIL"})
         console.log(error);
+        if(error.response.data === "token expired"){
+            
+            dispatch({type:"LOG_OUT"})
+           }
     }
 }
 
@@ -24,7 +28,11 @@ export const addComment=(id,comment) => async(dispatch)=>{
         //console.log(data,'posta action ane');
     } catch (error) {
         dispatch({type:"COMMENT_FAIL"})
-        console.log(error)        
+        console.log(error)
+        if(error.response.data === "token expired"){
+            
+            dispatch({type:"LOG_OUT"})
+           }        
     }
 }
 
@@ -36,6 +44,10 @@ export const deleteComment=(postId,commentId)=>async(dispatch)=>{
     } catch (error) {
         dispatch({type:"COMMENT_DEL_ERROR"})
         console.log(error)
+        if(error.response.data === "token expired"){
+            
+            dispatch({type:"LOG_OUT"})
+           }
     }
 }
 
@@ -47,5 +59,9 @@ export const deletePost=(id,currentUser)=> async(dispatch)=>{
         dispatch({type:"DELETE_SUCCESS", id:id})
     } catch (error) {
         dispatch({type:"DELETE_FAIL"})
+        if(error.response.data === "token expired"){
+            
+            dispatch({type:"LOG_OUT"})
+           }
     }
 }
