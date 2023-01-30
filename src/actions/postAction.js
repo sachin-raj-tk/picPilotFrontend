@@ -101,3 +101,14 @@ export const getReportedPosts = () => async (dispatch) => {
            }
     }
 }
+
+export const reportedPostRemove = (postId) => async (dispatch) =>{
+    try {
+        return await PostApi.reportedPostRemove(postId)
+    } catch (error) {
+        if(error.response.data === "token expired"){
+            
+            dispatch({type:"LOG_OUT"})
+           }
+    }
+}

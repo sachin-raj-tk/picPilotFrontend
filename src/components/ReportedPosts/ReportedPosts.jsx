@@ -11,7 +11,9 @@ import { borderRadius } from '@mui/system';
 import { toast } from 'react-hot-toast';
 import deleteButton from '../../img/deleteButton.png';
 import switcher from '../../img/switch.png'
-import { reportedPostRemove } from '../../api/PostRequest';
+import { reportedPostRemove } from '../../actions/postAction';
+import { useDispatch } from 'react-redux';
+
 
 function createData(name, calories, fat, carbs, protein) {
     return { name, calories, fat, carbs, protein };
@@ -51,9 +53,11 @@ const makeStyles=(active)=>{
 
 
 export default function BasicTable({allReportedPosts,setReportedPostsUseEffect,reportedPostsUseEffect}) {
+    
+    const dispatch = useDispatch()
 
  const handlePostRemove=async(postId)=>{
-      const response = await reportedPostRemove(postId)
+      const response = await dispatch(reportedPostRemove(postId)) 
       setReportedPostsUseEffect((prev)=>!prev)
       
  }
