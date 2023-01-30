@@ -8,8 +8,10 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import './Table.css'
 import { borderRadius } from '@mui/system';
-import { blockUser } from '../../api/UserRequest';
+
 import { toast } from 'react-hot-toast';
+import { useDispatch } from 'react-redux';
+import { blockUser } from '../../actions/userAction';
 
 
 function createData(name, calories, fat, carbs, protein) {
@@ -50,12 +52,13 @@ const makeStyles=(active)=>{
 
 
 export default function BasicTable({usersData,setuserActive}) {
+    const dispatch = useDispatch()
 
  console.log(usersData,'ith tabilil vanna data ane')
 
  const changeStatus=async(id,active)=>{
     console.log(id,active)
-    const blockunblock = await blockUser(id,active)
+    const blockunblock = await dispatch(blockUser(id,active)) 
     setuserActive((prev)=>!prev)
     toast.success(blockunblock.data);
  }

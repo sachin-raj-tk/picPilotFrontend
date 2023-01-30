@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import './LogoSearch.css'
 import Logo from '../../img/logo.png'
 import {UilSearch} from '@iconscout/react-unicons'
-import { getUserData } from '../../api/UserRequest'
+
 import { Link } from 'react-router-dom'
-import { getUser } from '../../actions/userAction'
+import { getUser, getUserData } from '../../actions/userAction'
 import { useDispatch } from 'react-redux'
 
 const LogoSearch = ({setNewUser,place}) => {
@@ -27,7 +27,7 @@ const LogoSearch = ({setNewUser,place}) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const {data} = await getUserData(query);
+      const {data} = await dispatch(getUserData(query)); 
       console.log(data,'kitti')
       setData(data);
     };

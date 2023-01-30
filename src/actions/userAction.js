@@ -84,3 +84,34 @@ export const sendVerifiyRequest = (userId) => async(dispatch) => {
         }
     }
 }
+
+
+export const getUserData = (query) => async(dispatch) => {
+    try {
+        return await UserApi.getUserData(query)
+    } catch (error) {
+        if(error.response.data === "token expired"){
+            dispatch({type:"LOG_OUT"})
+        }
+    }
+}
+
+
+export const blockUser = (id,active) => async(dispatch) => {
+    try {
+        return UserApi.blockUser(id,active)
+    } catch (error) {
+        if(error.response.data === "token expired"){
+            dispatch({type:"LOG_OUT"})
+        }
+    }
+}
+
+
+export const getVerifyNotifications = () => async(dispatch) => {
+    try {
+        
+    } catch (error) {
+        
+    }
+}

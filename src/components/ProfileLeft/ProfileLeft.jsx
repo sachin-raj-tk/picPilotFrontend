@@ -31,9 +31,9 @@ const ProfileLeft = () => {
     </span>
     }
     {
-        user.followers.length >=3 && user.isFamous === "notFamous"?
+        user.followers.length >=3 && user.isFamous === "notFamous" && params.id === user._id?
         <span className='verifyRequest' onClick={sendVerificationRequest}>Want to be verified ? Apply now </span>:
-        user.followers.length >=3 && user.isFamous === "pending"?
+        user.followers.length >=3 && user.isFamous === "pending" && params.id === user._id?
         <span className='verifyRequestSend'>Verify request Send. Please be patient</span>:""
 
         
