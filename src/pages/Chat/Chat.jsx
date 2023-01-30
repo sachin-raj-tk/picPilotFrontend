@@ -1,9 +1,9 @@
 import React, { useRef } from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
-import { createChats, getThisChat, userChats } from '../../api/ChatRequest'
+import { getThisChat} from '../../api/ChatRequest'
 import Conversation from '../../components/Conversation/Conversation'
 import LogoSearch from '../../components/LogoSearch/LogoSearch'
 import './Chat.css'
@@ -13,6 +13,7 @@ import Comment from '../../img/comment.png'
 import { UilSetting } from '@iconscout/react-unicons'
 import ChatBox from '../../components/ChatBox/ChatBox'
 import {io} from 'socket.io-client'
+import { createChats, userChats } from '../../actions/ChatAction.js'
 
 const Chat = () => {
     const { user } = useSelector((state) => state.authReducer.authData)
@@ -27,6 +28,7 @@ const Chat = () => {
     const [receiveMessage,setReceiveMessage] = useState(null)
     const [changeChat,setChangeChat] = useState(false) 
     const socket = useRef()
+    const dispatch = useDispatch()
 
     const phase = process.env.REACT_APP_PHASE
     const socketurl = phase === "testing"? process.env.REACT_APP_SOCKET_URL_TESTING: process.env.REACT_APP_SOCKET_URL;
@@ -56,7 +58,7 @@ const Chat = () => {
     useEffect(()=>{
         const createCht=async()=>{
         if(newUser !== null && user._id !== newUser._id){
-          await createChats(user._id,newUser._id)
+          await dispatch(createChats(user._id,newUser._id))
           
           
         }
@@ -75,9 +77,9 @@ const Chat = () => {
     useEffect(() => {
         const getChats = async () => {
             try {
-                const { data } = await userChats(user._id)
+                const  {data}  =  await dispatch(userChats(user._id))
                 setChats(data)
-                console.log(data)
+                console.log(data,'chat.jsx line 80')
             } catch (error) {
                 console.log(error);
             }
