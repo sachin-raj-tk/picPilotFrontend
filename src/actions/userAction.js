@@ -72,3 +72,15 @@ export const savePostApi = (id,postId)=> async(dispatch)=>{
         }
     }
 }
+
+
+export const sendVerifiyRequest = (userId) => async(dispatch) => {
+    try {
+        const response = await UserApi.sendVerifiyRequest(userId)
+        dispatch({type:"SEND_ISFAMOUS_REQUEST"})
+    } catch (error) {
+        if(error.response.data === "token expired"){
+            dispatch({type:"LOG_OUT"})
+        }
+    }
+}

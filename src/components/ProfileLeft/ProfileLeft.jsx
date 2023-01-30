@@ -1,7 +1,8 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
-import { sendVerifiyRequest } from '../../api/UserRequest'
+import { sendVerifiyRequest } from '../../actions/userAction'
+
 import FollowersCard from '../FollowersCard/FollowersCard'
 import InfoCard from '../InfoCard/InfoCard'
 import LogoSearch from '../LogoSearch/LogoSearch'
@@ -11,8 +12,8 @@ const ProfileLeft = () => {
   const {user} = useSelector((state)=>state.authReducer.authData)
   const dispatch = useDispatch()
   const sendVerificationRequest=async()=>{
-    dispatch({type:"SEND_ISFAMOUS_REQUEST"})
-    await sendVerifiyRequest(user._id)
+    
+    await dispatch(sendVerifiyRequest(user._id)) 
   }
    console.log(user.followers.length,'profileLeft.jsx');
   const params = useParams()
