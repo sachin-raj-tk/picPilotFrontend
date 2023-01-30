@@ -110,7 +110,7 @@ export const blockUser = (id,active) => async(dispatch) => {
 
 export const getVerifyNotifications = () => async(dispatch) => {
     try {
-        
+        return UserApi.getVerifyNotifications()
     } catch (error) {
         
     }

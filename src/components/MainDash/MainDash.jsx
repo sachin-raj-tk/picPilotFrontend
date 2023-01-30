@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllUser, getVerifyNotifications } from '../../api/UserRequest'
+import { getAllUser} from '../../api/UserRequest'
 import Table from '../Table/Table'
 import ReportedPosts from '../ReportedPosts/ReportedPosts'
 // import Cards from '../Cards/Cards'
@@ -10,6 +10,7 @@ import './MainDash.css'
 
 import AdminNotifications from '../AdminNotifications/AdminNotifications'
 import { getReportedPosts } from '../../actions/postAction'
+import { getVerifyNotifications } from '../../actions/userAction'
 
 const MainDash = ({mainDashItem}) => {
   const dispatch = useDispatch()
@@ -48,7 +49,7 @@ const MainDash = ({mainDashItem}) => {
 
   useEffect(()=>{
     const fetchVerifyNotifications=async()=>{
-    const verifyNotifications = await getVerifyNotifications()
+    const verifyNotifications = await dispatch(getVerifyNotifications()) 
     setAllVerifyNotifications(verifyNotifications.data)
    }
    fetchVerifyNotifications()
