@@ -7,7 +7,7 @@ const Pagination = ({peoplePerPage,totalPersons,paginate}) => {
     for(let i= 1; i<= Math.ceil(totalPersons/peoplePerPage);i++){
          pageNumbers.push(i)
     }
-    console.log(pageNumbers,'hai pagination')
+    
     
 
   return (

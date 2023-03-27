@@ -8,13 +8,11 @@ import './ReportPostModal.css'
 function ReportPostModal({reportPostModalOpen,setReportPostModalOpen,userId,postId}) {
     const [value, setValue] = useState(null)
     const dispatch = useDispatch()
-    console.log(value,'report post modal');
     const reportThisPost=async()=>{
        const reportData = {
         reportedUser:userId,
         reason:value
        } 
-       console.log(reportData,'reportpost model reporthispost function');
        setReportPostModalOpen(false)
        const response = await dispatch(ReportPost(reportData,postId)) 
     }
@@ -31,9 +29,7 @@ function ReportPostModal({reportPostModalOpen,setReportPostModalOpen,userId,post
     >
     <legend style={{color:"rgb(126, 228, 204)"}}>Please select the reason for reporting</legend>
     <div className="fieldsetStyle" onChange={(e)=>{
-        console.log(e.target.value)
         setValue(e.target.value)
-        console.log(value);
     }}>
         <div className='fieldsetStyleItems'>
       <input type="radio" id="contactChoice1" name="contact" value="inappropriate" />

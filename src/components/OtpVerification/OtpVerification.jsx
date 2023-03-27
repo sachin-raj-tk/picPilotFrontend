@@ -14,7 +14,7 @@ const OtpVerification = () => {
  const location = useLocation()
  const dispatch = useDispatch()
  let registerationDetails = location?.state?.registerationData
-console.log(location?.state?.registerationData,'heiksdfg');
+
 
  // to change the selected input filed
     useEffect(() => {
@@ -24,12 +24,11 @@ console.log(location?.state?.registerationData,'heiksdfg');
 
         codes.forEach((code, idx) => {
             code.addEventListener('keydown', (e) => {
-                // console.log(e)
-                // console.log(idx);
+                
                 if (e.key >= 0 && e.key <= 9) {
                     codes[idx].value = ''
                     setTimeout(() => codes[idx + 1]?.focus(), 10)
-                    // console.log(codes[idx],'hei')
+                    
                 }
                 else if (e.key === 'Backspace') {
                     // codes[idx].value = ''
@@ -44,15 +43,13 @@ console.log(location?.state?.registerationData,'heiksdfg');
     // to update the otp varible
     useEffect(()=>{
         setOtp(otpOne+otpTwo+otpThree+otpFour)
-         console.log(otp,'vendum otp')
+         
     },[otpOne,otpTwo,otpThree,otpFour])
 
     //verify Otp
     const verifyOtp=async(e)=>{
        e.preventDefault()
-       console.log(otp,'nen otp ane')
-       console.log(otp.length)
-       console.log(typeof(otp));
+       
        dispatch(verifyotp(registerationDetails.userId,otp))
     //    
       

@@ -35,10 +35,8 @@ const Post = ({ data }) => {
    const [savedPost,setSavedPost] = useState(user.savedposts.includes(data._id))
    const [commentString, setCommentString] = useState("")
    const [reportPostModalOpen,setReportPostModalOpen] = useState(false)
-    console.log(user,'post.jsx savedpsots')
    const phase = process.env.REACT_APP_PHASE
    const FOLDER = phase === "testing" ? process.env.REACT_APP_PUBLIC_FOLDER_TESTING : process.env.REACT_APP_PUBLIC_FOLDER;
-   console.log(phase, FOLDER, 'post.jsx phase value and folder value');
 
    useEffect(() => {
       const fetchUser = async () => {

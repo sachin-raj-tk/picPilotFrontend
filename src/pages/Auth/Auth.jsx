@@ -13,7 +13,6 @@ const Auth = () => {
   const dispatch = useDispatch()
   const loading = useSelector((state)=>state.authReducer.loading)
   const [isSignUp, setSignUp] = useState(true)
-  console.log(loading);
   const navigate = useNavigate()
   const [data, setData] = useState({ firstname: "", lastname: "", username: "", password: "", confirmpass: "" })
   const [confirmPass, setConfirmPass] = useState(true)
@@ -28,7 +27,6 @@ const Auth = () => {
     if (isSignUp) {
       if(data.password === data.confirmpass){
        const response = await signUp(data)
-       console.log(response.data.data,'evide response');
        navigate("/otpverification",{
         state:{
           registerationData: response.data.data
@@ -74,7 +72,7 @@ const Auth = () => {
             </div>
           )}
           <div>
-            <input type="text" placeholder='UserName' className="infoInput" name='username' onChange={handleChange} value={data.username}/>
+            <input type="text" placeholder='Email' className="infoInput" name='username' onChange={handleChange} value={data.username}/>
 
           </div>
           <div>

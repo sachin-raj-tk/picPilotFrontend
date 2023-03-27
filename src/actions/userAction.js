@@ -18,10 +18,8 @@ export const updateUser = (id, formData) => async(dispatch) => {
 export const followUser = (id,data) => async(dispatch)=>{
     try {
       const response = await UserApi.followUser(id,data)
-     console.log(response,'useraction, followuser');
     dispatch({type: "FOLLOW_USER",data:id,currentUserId:data._id})
     } catch (error) {
-        console.log(error.response.data === "token expired",'follow user error'); 
         if(error.response.data === "token expired"){
             
          dispatch({type:"LOG_OUT"})
@@ -49,8 +47,6 @@ export const getUser = (id) => async(dispatch)=>{
      
      try {
         const {data} = await UserApi.getUser(id)
-        console.log(data,'useraction getuser')
-        console.log(id,'useraction getuser1');   
         dispatch({type:"USER_DETAILS_FETCHED",data:data})
     } catch (error) {
          dispatch({type:"USER_DETAILS_FETCHING_FAIL"})

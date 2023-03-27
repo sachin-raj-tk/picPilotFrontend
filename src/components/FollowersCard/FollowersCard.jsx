@@ -27,7 +27,6 @@ const FollowersCard = ({locality}) => {
     const fetchPersons = async()=>{
       const {data} = await getAllUser();
       setPersons(data)
-      console.log(persons,'hai followerscard');
     }
     fetchPersons()
   },[])
@@ -35,7 +34,6 @@ const FollowersCard = ({locality}) => {
   const followersArray = persons.filter((person)=>user.followers.includes(person._id))
   const followingArray = persons.filter((person)=>user.following.includes(person._id))
   const personsArray = persons.filter((person)=>!user.following.includes(person._id) && !user.followers.includes(person._id) && person._id !== user._id)
-  console.log(personsArray,'hi again followerscard');
 
 
   //get following list by pagination
@@ -45,7 +43,6 @@ const FollowersCard = ({locality}) => {
   const followingPaginate = (pageNumber) =>{
     setCurrentFollowingPage(pageNumber)
   }
-  console.log(currentFollowingList,'followers current')
 
 
 

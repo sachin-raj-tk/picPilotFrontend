@@ -28,7 +28,6 @@ const LogoSearch = ({setNewUser,place}) => {
   useEffect(() => {
     const fetchData = async () => {
       const {data} = await dispatch(getUserData(query)); 
-      console.log(data,'kitti')
       setData(data);
     };
     if ( query.length >=1) fetchData();

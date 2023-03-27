@@ -15,7 +15,6 @@ const Posts = ({savedPosts}) => {
   posts = posts.filter((post)=>post.removed===false)
   
   const postReducer = useSelector((state)=>state.postReducer)
-  console.log(JSON.stringify(postReducer),'posts.jsx')
   const params = useParams()
   useEffect(()=>{
     dispatch(getTimelinePosts(user._id))

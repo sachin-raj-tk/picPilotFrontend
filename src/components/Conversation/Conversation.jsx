@@ -3,7 +3,6 @@ import { useState } from 'react'
 import { getUser } from '../../api/UserRequest'
 
 const Conversation = ({data,currentUserId,online}) => {
-    console.log(online);
     const [userData,setUserData] = useState(null)
 
     const phase = process.env.REACT_APP_PHASE
@@ -15,7 +14,6 @@ const Conversation = ({data,currentUserId,online}) => {
             try {
                 const {data} = await getUser(userId)
                 setUserData(data)        
-                console.log(data)     
             } catch (error) {
                 console.log(error);
             }

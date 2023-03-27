@@ -6,15 +6,7 @@ import './PostSide.css'
 
 const PostSide = ({showSaved}) => {
   const [savedPosts,setSavedPosts] = useState(0)
-  // const handleAllPosts =()=>{
-  //   setSavedPosts(0)
-  // }
-  // const handleSavedPosts = ()=>{
-  //   setSavedPosts(1)
-  // }
-
-  // const handleMyPosts
-  console.log(savedPosts,'postside.jsx');
+  
   return (
    <div className="PostSide">
     <PostShare/>

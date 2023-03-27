@@ -22,7 +22,6 @@ const InfoCard = () => {
         navigate('/chat',
             {state:{data:profileUser}}
          )
-        console.log('inside goto chat in infocard')
     }
 
     // useEffect(()=>{

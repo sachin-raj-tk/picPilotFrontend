@@ -15,7 +15,6 @@ const ProfileLeft = () => {
     
     await dispatch(sendVerifiyRequest(user._id)) 
   }
-   console.log(user.followers.length,'profileLeft.jsx');
   const params = useParams()
   return (
    <div className="ProfileSid">

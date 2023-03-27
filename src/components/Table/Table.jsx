@@ -54,10 +54,8 @@ const makeStyles=(active)=>{
 export default function BasicTable({usersData,setuserActive}) {
     const dispatch = useDispatch()
 
- console.log(usersData,'ith tabilil vanna data ane')
 
  const changeStatus=async(id,active)=>{
-    console.log(id,active)
     const blockunblock = await dispatch(blockUser(id,active)) 
     setuserActive((prev)=>!prev)
     toast.success(blockunblock.data);
@@ -84,7 +82,6 @@ export default function BasicTable({usersData,setuserActive}) {
                             key={user._id}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
-                                {console.log(user.active,'print cheyy')}
                                 <TableCell component="th" scope="row">
                                     {user.firstname} {user.lastname}
                                 </TableCell>

@@ -14,7 +14,6 @@ function App() {
   const user = useSelector((state) => state.authReducer.authData);
   const admin = user?.user.isAdmin?true:false
  
-  console.log(admin,'app.js is admin ane')
 
   return (
     <div className="App">

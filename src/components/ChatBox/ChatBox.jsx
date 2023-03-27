@@ -43,7 +43,6 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receiveMessage }) => {
         const fetchMessages = async () => {
             try {
                 const {data} = await dispatch(getMessages(chat._id)) 
-                console.log(data);
                 setMessages(data);
             } catch (error) {
                 console.log(error)
@@ -58,7 +57,6 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receiveMessage }) => {
 
     const handleSend = async(e) =>{
         e.preventDefault();
-        console.log(chat._id);
         const message = {
             senderId : currentUser,
             text : newMessage,

@@ -19,7 +19,6 @@ const Chat = () => {
     const { user } = useSelector((state) => state.authReducer.authData)
     const location = useLocation()
     const newUserfromProfileMessageButton = location?.state?.data
-    console.log(newUserfromProfileMessageButton,'checking weathre it is coming')
     const [chats, setChats] = useState([])
     const [newUser,setNewUser] = useState(null)
     const [currentChat,setCurrentChat] = useState(null)
@@ -33,7 +32,6 @@ const Chat = () => {
     const phase = process.env.REACT_APP_PHASE
     const socketurl = phase === "testing"? process.env.REACT_APP_SOCKET_URL_TESTING: process.env.REACT_APP_SOCKET_URL;
 
-    console.log(newUser,'chat.jsx newuser')
 
     //send message to socket server
     useEffect(() => {
@@ -70,7 +68,6 @@ const Chat = () => {
     useEffect(()=>{
         socket.current.on("receive-message",(data)=>{
             setReceiveMessage(data)
-            console.log(receiveMessage,'receive message chat.jsx');
         })
     },[])
 
@@ -79,7 +76,6 @@ const Chat = () => {
             try {
                 const  {data}  =  await dispatch(userChats(user._id))
                 setChats(data)
-                console.log(data,'chat.jsx line 80')
             } catch (error) {
                 console.log(error);
             }
@@ -92,24 +88,17 @@ const Chat = () => {
     useEffect(()=>{
         const changeNewUser = async() =>{
          setNewUser(newUserfromProfileMessageButton)
-         console.log(newUserfromProfileMessageButton,'hai from changenew user chat.jsx')
          const setThisAscurrentChat = await getThisChat(newUserfromProfileMessageButton._id,user._id)
          setCurrentChat(setThisAscurrentChat.data)
          if(setThisAscurrentChat){setChangeChat(true)}
-         console.log(setThisAscurrentChat,'from chat.jsx setthisas current chat');
         }
         changeNewUser() 
      },[newUserfromProfileMessageButton,chats])
 
     
     const checkOnlineStatus = (chat) => {
-        console.log(chat,"chat.jsx chekconline status")
         const chatMember = chat.members.find((member)=> member !== user._id)
-        console.log(chatMember,'again');
-        console.log(user._id,'then again')
-        console.log(onlineUsers,'again and agian');
         const online = onlineUsers.find((user)=>user.userId === chatMember)
-        console.log(online, 'true or false')
         return online ? true: false
     }
     
@@ -139,7 +128,7 @@ const Chat = () => {
                             <img src={Home} alt="" />
                         </Link>
                         {/* <UilSetting /> */}
-                        <img src={Noti} alt="" />
+                        {/* <img src={Noti} alt="" /> */}
                         <Link to="../chat">
                             <img src={Comment} alt="" />
                         </Link>

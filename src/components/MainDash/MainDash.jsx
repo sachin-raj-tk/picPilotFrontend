@@ -14,7 +14,6 @@ import { getVerifyNotifications } from '../../actions/userAction'
 
 const MainDash = ({mainDashItem}) => {
   const dispatch = useDispatch()
-  console.log(mainDashItem);
    const {user} = useSelector((state)=>state.authReducer.authData)
    const [usersData,setUsersData] = useState([])
    const [userActive,setuserActive] = useState(false)
@@ -28,24 +27,19 @@ const MainDash = ({mainDashItem}) => {
         setUsersData(users.data.filter((userData)=>userData._id !== user._id))
       }
       fetchUsersData()
-      console.log('woring ano useeffect maindash')
    },[userActive])
 
 
    useEffect(()=>{
     const fetchPostData = async() =>{
-      console.log("vilicho");
       const posts = await dispatch(getReportedPosts()) 
-      console.log(posts,'maindash fetchpostdata');
       setAllReportedPosts(posts.data)
-      console.log(allReportedPosts,'maindash fetchpostdata thanne');
     }
     fetchPostData()
     
   },[reportedPostsUseEffect])
 
    
-   console.log(usersData,'evide usersdata')
 
   useEffect(()=>{
     const fetchVerifyNotifications=async()=>{
@@ -55,7 +49,6 @@ const MainDash = ({mainDashItem}) => {
    fetchVerifyNotifications()
   },[mainDashItem,isFamousMadeTrue])
   
-  console.log(allVerifyNotifications,'maindash line53');
   return (
     
     <div className="MainDash">

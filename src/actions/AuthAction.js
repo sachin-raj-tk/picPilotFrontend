@@ -7,9 +7,9 @@ export const logIn = (formData) => async(dispatch) => {
         const {data} = await AuthApi.logIn(formData)
         dispatch({type:"AUTH_SUCCESS", data: data})
         toast.success("Login Success")
-        console.log(data,'authaction loggin')
+        
     } catch (error) {
-        console.log(error);
+        
         dispatch({type:"AUTH_FAIL"})
         toast.error(error.response.data)
     }
@@ -17,15 +17,15 @@ export const logIn = (formData) => async(dispatch) => {
 
 
 export const verifyotp = (userId,otp) => async(dispatch) => {
-    console.log(otp,'ith authaction verify otp ane');
+    
     dispatch({type:"AUTH_START"})
     try {
         const {data} = await AuthApi.verifyotp(userId,otp)
-        console.log(data,'auth data ethiyo authacion signupil')
+        
         dispatch({type:"AUTH_SUCCESS", data: data})
         
     } catch (error) {
-        console.log(error);
+        
         dispatch({type:"AUTH_FAIL"})
     }
 }

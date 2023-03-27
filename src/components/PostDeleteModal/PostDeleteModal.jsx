@@ -10,7 +10,6 @@ const PostDeleteModal = ({modalOpen,setModalOpen,id,currentUser}) => {
     const handleDelete = (e)=>{
         e.preventDefault()
         dispatch(deletePost(id,currentUser))
-        console.log(currentUser,'deletmodal.jsx')
     }
   return (
     <Modal
